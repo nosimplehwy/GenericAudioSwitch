@@ -35,27 +35,22 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Crestron.DeviceDrivers.API">
-      <HintPath>..\..\..\..\Documents\Crestron\SDK\SDK\Libraries\Crestron.DeviceDrivers.API.dll</HintPath>
+      <HintPath>..\..\..\..\..\Users\Jen\Documents\Crestron\SDK\Libraries\Crestron.DeviceDrivers.API.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Crestron.DeviceDrivers.Core">
-      <HintPath>..\..\..\..\Documents\Crestron\SDK\SDK\Libraries\Crestron.DeviceDrivers.Core.dll</HintPath>
+      <HintPath>..\..\..\..\..\Users\Jen\Documents\Crestron\SDK\Libraries\Crestron.DeviceDrivers.Core.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Crestron.DeviceDrivers.SDK">
-      <HintPath>..\..\..\..\Documents\Crestron\SDK\SDK\Libraries\Crestron.DeviceDrivers.SDK.dll</HintPath>
+      <HintPath>..\..\..\..\..\Users\Jen\Documents\Crestron\SDK\Libraries\Crestron.DeviceDrivers.SDK.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="CrestronCertifiedDriverResourcesLibrary">
-      <HintPath>..\..\..\..\Documents\Crestron\CTI\Masters 2020\MPX401\Masters2020_MPX401_Class_Content_V1\Masters2020_MPX401_Class_Content\CertifiedDriversSDK\Libraries\CrestronCertifiedDriverResourcesLibrary.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="RADAVReceiver">
+      <HintPath>..\..\..\..\..\Users\Jen\Documents\Crestron\SDK\Libraries\RADAVReceiver.dll</HintPath>
     </Reference>
     <Reference Include="RADCommon">
-      <HintPath>..\..\..\..\Documents\Crestron\SDK\SDK\Libraries\RADCommon.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="RADProTransports">
-      <HintPath>..\..\..\..\Documents\Crestron\SDK\SDK\Libraries\RADProTransports.dll</HintPath>
+      <HintPath>..\..\..\..\..\Users\Jen\Documents\Crestron\SDK\Libraries\RADCommon.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
