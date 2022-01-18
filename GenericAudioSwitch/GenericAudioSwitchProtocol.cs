@@ -7,6 +7,7 @@ namespace GenericAudioSwitch
 {
     public class GenericAudioSwitchProtocol : AAudioVideoSwitcherProtocol
     {
+        private const double VolumeStep = 1.0;
 
         public GenericAudioSwitchProtocol(ISerialTransport transport, byte id)
             : base(transport, id)
@@ -15,6 +16,8 @@ namespace GenericAudioSwitch
         }
 
     
+
+
     }
 
   

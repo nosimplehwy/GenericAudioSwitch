@@ -153,9 +153,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DriverLog.cs" />
     <Compile Include="GenericAudioSwitch.cs" />
     <Compile Include="GenericAudioSwitchProtocol.cs" />
+    <Compile Include="MathFunctions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScheduledEventTimer.cs" />
+    <Compile Include="SoundUnitedCommandQueueingOverrides.cs" />
+    <Compile Include="SoundUnitedMuteVolController.cs" />
+    <Compile Include="SoundUnitedVolumeController.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="GenericAudioSwitch.json" />
