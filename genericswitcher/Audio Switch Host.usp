@@ -1,0 +1,40 @@
+#SYMBOL_NAME "Generic Audio Switch Host"
+#CATEGORY "46" "ATI"
+#ENABLE_TRACE
+#DEFAULT_VOLATILE
+#ENABLE_STACK_CHECKING
+  
+#USER_SIMPLSHARP_LIBRARY "GenericAudioSwitchProcessor"
+
+
+DIGITAL_OUTPUT
+_skip_,
+Connected;
+
+AudioSwitch bridge;
+
+INTEGER_PARAMETER IpPort;
+
+#BEGIN_PARAMETER_PROPERTIES IpPort
+	propValidUnits = unitDecimal;
+	propDefaultUnit = unitDecimal;
+	propDefaultValue = 65000d;
+#END_PARAMETER_PROPERTIES
+ 
+
+Callback Function IsConnectedHandler(Integer status)
+{
+ 	Connected = status;
+} 
+
+Function Main()
+{
+	WaitForInitializationComplete();
+	
+	registerdelegate(AudioSwitch, IsConnected, IsConnectedHandler);
+
+    bridge.Enable(IpPort);
+
+}
+
+   

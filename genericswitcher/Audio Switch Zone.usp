@@ -1,0 +1,59 @@
+#SYMBOL_NAME "Generic Audio Switch Zone"
+#CATEGORY "46" "ATI"
+#ENABLE_TRACE
+#DEFAULT_VOLATILE
+#ENABLE_STACK_CHECKING
+  
+#USER_SIMPLSHARP_LIBRARY "GenericAudioSwitchProcessor"
+
+DIGITAL_OUTPUT
+_skip_,
+MuteFb;
+
+ANALOG_OUTPUT
+Source,
+Volume;
+
+AudioSwitchZone zone;
+
+INTEGER_PARAMETER ZoneNum;
+
+#BEGIN_PARAMETER_PROPERTIES ZoneNum
+	propValidUnits = unitDecimal;
+	propDefaultUnit = unitDecimal;
+	propBounds=1d, 32d;
+	propDefaultValue = 1d;
+    propShortDescription= "Value of switcher output.";
+#END_PARAMETER_PROPERTIES
+
+Callback Function UpdateRoute(Integer route)
+{
+	Trace("Zone %d UpdateSource : %d",ZoneNum, route);
+ 	Source = route;
+} 
+
+Callback Function UpdateVol(Integer vol)
+{
+ 	
+	Trace("Zone %d UpdateVol : %d",ZoneNum, vol);
+	Volume = vol;
+}
+
+Callback Function UpdateMute(Integer mute)
+{
+	Trace("Zone %d UpdateMute : %d",ZoneNum, mute);
+	MuteFb = mute;
+}
+
+Function Main()
+{
+	WaitForInitializationComplete();
+
+	zone.Initialize(ZoneNum);
+	
+	registerdelegate(zone, Route, UpdateRoute);
+	registerdelegate(zone, Vol, UpdateVol);
+	registerdelegate(zone, Mute, UpdateMute);
+}
+
+   
