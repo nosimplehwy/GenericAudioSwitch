@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Text;
 using System.Collections.Generic;
+using System.Text;
 using System.Text.RegularExpressions;
+using AudioSwitchProcessor;
 using Crestron.SimplSharp;
 using Crestron.SimplSharp.CrestronSockets;
 
-
-namespace AudioSwitchBridge
+namespace GenericAudioSwitchProcessor
 {
     public delegate void ConnectStatus(ushort status);
     
@@ -294,13 +294,13 @@ namespace AudioSwitchBridge
                      var message = _receiveQueue.Dequeue();
                      if (!String.IsNullOrEmpty(message))
                      {
-                         Logger.Log(LogMethod.Console, "ProcessQueue", "Message: " + message);
+                         Logger.Log(LogMethod.Console, "Audioswitch ProcessQueue", "Message: " + message);
                          ProcessMessage(message);
                      }
                  }
                  catch (Exception e)
                  {
-                     Logger.Log(LogMethod.Console, "ProcessQueue", "Error processing queue: " + e);
+                     Logger.Log(LogMethod.Console, "AudioSwitch ProcessQueue", "Error processing queue: " + e);
                  }
              }
          }

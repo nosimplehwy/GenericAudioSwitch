@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using Crestron.SimplSharp;
 using Crestron.SimplSharp.CrestronSockets;
+using GenericAudioSwitchProcessor;
 
 
-
-namespace AudioSwitchBridge
+namespace AudioSwitchProcessor
 {
     
 
@@ -204,12 +204,12 @@ namespace AudioSwitchBridge
                 try
                 {
                     var message = _receiveQueue.Dequeue();
-                    Logger.Log(LogMethod.Console, "ProcessQueue", "Message: " + message);
+                    Logger.Log(LogMethod.Console, "Server ProcessQueue", "Message: " + message);
                     AudioSwitch.ProcessMessage(message);
                 }
                 catch (Exception e)
                 {
-                    Logger.Log(LogMethod.Console, "ProcessQueue", "Error processing queue: " + e);
+                    Logger.Log(LogMethod.Console, "Server ProcessQueue", "Error processing queue: " + e);
                 }
             }
         }

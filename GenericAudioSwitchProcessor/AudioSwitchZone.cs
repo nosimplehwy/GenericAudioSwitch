@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Crestron.SimplSharp;
+using GenericAudioSwitchProcessor;
 
-namespace AudioSwitchBridge
+namespace AudioSwitchProcessor
 {
     public class AudioSwitchZone
     {
@@ -138,41 +139,42 @@ namespace AudioSwitchBridge
         private void UpdateVolume(ushort level)
         {
             Logger.Log(LogMethod.ConsoleAndError, "UpdateVolume - Level", level.ToString());
-            var change = 0;
+            //var change = 0;
 
-            if (level > _vol)
-                change = 655;
-            else if (level < _vol)
-                change = -655;
-            else
-            {
-                Stop();
-                return;
-            }
+            //if (level > _vol)
+            //    change = 655;
+            //else if (level < _vol)
+            //    change = -655;
+            //else
+            //{
+            //    Stop();
+            //    return;
+            //}
 
-            int newLevel = _vol + change;
+            //int newLevel = _vol + change;
 
-            var atLimit = false;
-            if (newLevel > 65535)
-            {
-                newLevel = 65535;
-                atLimit = true;
-            }
-            else if (newLevel < 0)
-            {
-                newLevel = 0;
-                atLimit = true;
-            }
+            //var atLimit = false;
+            //if (newLevel > 65535)
+            //{
+            //    newLevel = 65535;
+            //    atLimit = true;
+            //}
+            //else if (newLevel < 0)
+            //{
+            //    newLevel = 0;
+            //    atLimit = true;
+            //}
 
-            _vol = (ushort)newLevel;
+           // _vol = (ushort)newLevel;
+           _vol = level;
                 Vol.Invoke(_vol);
-                SendVolume(_vol);
-                Logger.Log(LogMethod.ConsoleAndError, "UpdateVolume - New Level", newLevel.ToString());
+               // SendVolume(_vol);
+                Logger.Log(LogMethod.ConsoleAndError, "UpdateVolume - New Level", level.ToString());
 
-            if (atLimit) // Don't go past end
-               Stop();
-            else if (Timer == null)
-                Timer = new CTimer(o => { UpdateVolume(level); }, null, _repeatDelay,_repeatTime);
+           // if (atLimit) // Don't go past end
+            //   Stop();
+           // else if (Timer == null)
+             //   Timer = new CTimer(o => { UpdateVolume(level); }, null, _repeatDelay,_repeatTime);
         }
 
         private void VolumeUp()
@@ -197,6 +199,7 @@ namespace AudioSwitchBridge
 
         private void SendVolume(int level)
         {
+            Logger.Log(LogMethod.ConsoleAndError, "SendVolume", level.ToString());
             AudioSwitch.SendData("^OUTPUT" + _zone + ":VOL" + level + "\r");
         }
 
@@ -213,6 +216,7 @@ namespace AudioSwitchBridge
 
         private void SendMute()
         {
+            Logger.Log(LogMethod.ConsoleAndError, "SendMute", _mute.ToString());
             AudioSwitch.SendData("^OUTPUT" + _zone + ":MUTE" + _mute + "\r");
         }
 

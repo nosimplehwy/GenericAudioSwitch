@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Crestron.SimplSharp;
 
-namespace AudioSwitchBridge
+namespace AudioSwitchProcessor
 {
     internal enum LogMethod
     {
