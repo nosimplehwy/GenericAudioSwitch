@@ -34,11 +34,11 @@ namespace AudioSwitchZektorProAudio
         // Controller that connects the ramping timer to the volume level
         public LevelRamper VolumeRamper { get; private set; }
         
-        public SoundUnitedVolumeController(Func<bool> getMuteState, ScalingLevelTranslator.LevelChangeDelegate changeVolume, double volumeStepSize, long timeBetweenCommands)
+        public SoundUnitedVolumeController(ScalingLevelTranslator.LevelChangeDelegate changeVolume, double volumeStepSize, long timeBetweenCommands)
         {
-            _defaultVolumeScale = new Scale(0, 65535, volumeStepSize);
+            _defaultVolumeScale = new Scale(0, 100, volumeStepSize);
                 
-            MuteVol = new SoundUnitedMuteVolController(getMuteState);
+            //MuteVol = new SoundUnitedMuteVolController(getMuteState);
             VolumeLevel = new PercentUshortLevelTranslator(changeVolume, _defaultVolumeScale);
 
             for (var i = 0; i < _rampingSchedule.Length; i++)
