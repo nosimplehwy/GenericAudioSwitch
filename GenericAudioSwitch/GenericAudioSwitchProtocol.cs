@@ -31,38 +31,14 @@ namespace GenericAudioSwitch
 
             _controllers = new Dictionary<string, SoundUnitedVolumeController>()
             {
-                {"1",new SoundUnitedVolumeController(Zone1IsMuted,ChangeZone1Volume, VolumeStep, TimeBetweenCommands)},
-                {"2",new SoundUnitedVolumeController(Zone2IsMuted,ChangeZone2Volume, VolumeStep, TimeBetweenCommands)},
-                {"3",new SoundUnitedVolumeController(Zone3IsMuted,ChangeZone3Volume, VolumeStep, TimeBetweenCommands)},
-                {"4",new SoundUnitedVolumeController(Zone4IsMuted,ChangeZone4Volume, VolumeStep, TimeBetweenCommands)},
-                {"5",new SoundUnitedVolumeController(Zone5IsMuted,ChangeZone5Volume, VolumeStep, TimeBetweenCommands)},
-                {"6",new SoundUnitedVolumeController(Zone6IsMuted,ChangeZone6Volume, VolumeStep, TimeBetweenCommands)},
-                {"7",new SoundUnitedVolumeController(Zone7IsMuted,ChangeZone7Volume, VolumeStep, TimeBetweenCommands)},
-                {"8",new SoundUnitedVolumeController(Zone8IsMuted,ChangeZone8Volume, VolumeStep, TimeBetweenCommands)},
-                {"9",new SoundUnitedVolumeController(Zone9IsMuted,ChangeZone9Volume, VolumeStep, TimeBetweenCommands)},
-                {"10",new SoundUnitedVolumeController(Zone10IsMuted,ChangeZone10Volume, VolumeStep, TimeBetweenCommands)},
-                {"11",new SoundUnitedVolumeController(Zone11IsMuted,ChangeZone11Volume, VolumeStep, TimeBetweenCommands)},
-                {"12",new SoundUnitedVolumeController(Zone12IsMuted,ChangeZone12Volume, VolumeStep, TimeBetweenCommands)},
-                {"13",new SoundUnitedVolumeController(Zone13IsMuted,ChangeZone13Volume, VolumeStep, TimeBetweenCommands)},
-                {"14",new SoundUnitedVolumeController(Zone14IsMuted,ChangeZone14Volume, VolumeStep, TimeBetweenCommands)},
-                {"15",new SoundUnitedVolumeController(Zone15IsMuted,ChangeZone15Volume, VolumeStep, TimeBetweenCommands)},
-                {"16",new SoundUnitedVolumeController(Zone16IsMuted,ChangeZone16Volume, VolumeStep, TimeBetweenCommands)},
-                {"17",new SoundUnitedVolumeController(Zone17IsMuted,ChangeZone17Volume, VolumeStep, TimeBetweenCommands)},
-                {"18",new SoundUnitedVolumeController(Zone18IsMuted,ChangeZone18Volume, VolumeStep, TimeBetweenCommands)},
-                {"19",new SoundUnitedVolumeController(Zone19IsMuted,ChangeZone19Volume, VolumeStep, TimeBetweenCommands)},
-                {"20",new SoundUnitedVolumeController(Zone20IsMuted,ChangeZone20Volume, VolumeStep, TimeBetweenCommands)},
-                {"21",new SoundUnitedVolumeController(Zone21IsMuted,ChangeZone21Volume, VolumeStep, TimeBetweenCommands)},
-                {"22",new SoundUnitedVolumeController(Zone22IsMuted,ChangeZone22Volume, VolumeStep, TimeBetweenCommands)},
-                {"23",new SoundUnitedVolumeController(Zone23IsMuted,ChangeZone23Volume, VolumeStep, TimeBetweenCommands)},
-                {"24",new SoundUnitedVolumeController(Zone24IsMuted,ChangeZone24Volume, VolumeStep, TimeBetweenCommands)},
-                {"25",new SoundUnitedVolumeController(Zone25IsMuted,ChangeZone25Volume, VolumeStep, TimeBetweenCommands)},
-                {"26",new SoundUnitedVolumeController(Zone26IsMuted,ChangeZone26Volume, VolumeStep, TimeBetweenCommands)},
-                {"27",new SoundUnitedVolumeController(Zone27IsMuted,ChangeZone27Volume, VolumeStep, TimeBetweenCommands)},
-                {"28",new SoundUnitedVolumeController(Zone28IsMuted,ChangeZone28Volume, VolumeStep, TimeBetweenCommands)},
-                {"29",new SoundUnitedVolumeController(Zone29IsMuted,ChangeZone29Volume, VolumeStep, TimeBetweenCommands)},
-                {"30",new SoundUnitedVolumeController(Zone30IsMuted,ChangeZone30Volume, VolumeStep, TimeBetweenCommands)},
-                {"31",new SoundUnitedVolumeController(Zone31IsMuted,ChangeZone31Volume, VolumeStep, TimeBetweenCommands)},
-                {"32",new SoundUnitedVolumeController(Zone32IsMuted,ChangeZone32Volume, VolumeStep, TimeBetweenCommands)},
+                {"1",new SoundUnitedVolumeController(ChangeZone1Volume, VolumeStep, TimeBetweenCommands)},
+                {"2",new SoundUnitedVolumeController(ChangeZone2Volume, VolumeStep, TimeBetweenCommands)},
+                {"3",new SoundUnitedVolumeController(ChangeZone3Volume, VolumeStep, TimeBetweenCommands)},
+                {"4",new SoundUnitedVolumeController(ChangeZone4Volume, VolumeStep, TimeBetweenCommands)},
+                {"5",new SoundUnitedVolumeController(ChangeZone5Volume, VolumeStep, TimeBetweenCommands)},
+                {"6",new SoundUnitedVolumeController(ChangeZone6Volume, VolumeStep, TimeBetweenCommands)},
+                {"7",new SoundUnitedVolumeController(ChangeZone7Volume, VolumeStep, TimeBetweenCommands)},
+                {"8",new SoundUnitedVolumeController(ChangeZone8Volume, VolumeStep, TimeBetweenCommands)},
             };
 
             foreach (var controller in _controllers)
@@ -104,10 +80,24 @@ namespace GenericAudioSwitch
             base.Dispose();
         }
 
+        //public override void ExtenderSetVolume(AudioVideoExtender extender, uint volume)
+        //{
+        //    DriverLog.Log(EnableLogging, Log, LoggingLevel.Debug, "ExtenderSetVolume", String.Format($"{extender.ApiIdentifier}, vol {volume}"));
+        //   // VolumeControllerForCommand(extender.ApiIdentifier).VolumeLevel.Percent = volume;
+          
+        //}
         public override void ExtenderSetVolume(AudioVideoExtender extender, uint volume)
-        {
+        { 
             DriverLog.Log(EnableLogging, Log, LoggingLevel.Debug, "ExtenderSetVolume", String.Format($"{extender.ApiIdentifier}, vol {volume}"));
-            VolumeControllerForCommand(extender.ApiIdentifier).VolumeLevel.Percent = volume;
+
+            base.ExtenderSetVolume(extender, volume);
+        }
+
+        public override void ExtenderMuteOff(AudioVideoExtender extender)
+        {
+            DriverLog.Log(EnableLogging, Log, LoggingLevel.Debug, "ExtenderMuteOff", String.Format($"{extender.ApiIdentifier}"));
+
+            base.ExtenderMuteOff(extender);
         }
 
         private void VolumeLevel_PercentChanged(object sender, Crestron.RAD.Ext.Util.Scaling.LevelChangedEventArgs<uint> e)
@@ -387,7 +377,7 @@ namespace GenericAudioSwitch
                 string.Format($"OUTPUT{zone}:VOL{vol}"),
                 CommonCommandGroupType.AudioVideoExtender,
                 null,
-                false,
+                true,
                 CommandPriority.Normal,
                 StandardCommandsEnum.Vol);
 
@@ -395,7 +385,7 @@ namespace GenericAudioSwitch
             // which means it needs to ensure we poll later even if this
             // command is not queued. Otherwise, fake feedback will leave the
             // application with the wrong volume value.
-            MuteVolControllerForCommand(zone).StartControllingVolume();
+           // MuteVolControllerForCommand(zone).StartControllingVolume();
 
             SendCommand(command);
         }
