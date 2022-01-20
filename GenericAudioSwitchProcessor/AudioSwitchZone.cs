@@ -168,7 +168,7 @@ namespace AudioSwitchProcessor
            // _vol = (ushort)newLevel;
            _vol = level;
                 Vol.Invoke(_vol);
-               // SendVolume(_vol);
+                SendVolume(_vol);
                 Logger.Log(LogMethod.ConsoleAndError, "UpdateVolume - New Level", level.ToString());
 
            // if (atLimit) // Don't go past end
