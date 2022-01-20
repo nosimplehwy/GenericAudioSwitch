@@ -32,14 +32,14 @@
     "GeneralInformation": {
       "DeviceType": "AV Switcher",
       "Manufacturer": "ATI",
-      "BaseModel": "Generic Audio Switch",
-      "VersionDate": "2021-07-26 09:12:17.000",
+      "BaseModel": "Generic Audio Switch 8x8",
+      "VersionDate": "2021-01-20 09:00:00.000",
       "DriverVersion": "1.00.000.0000",
       "SdkVersion": "8.0.0",
       "Description": "Audio Switch bridge to SIMPL",
       "Guid": "5BB66CB3-51F9-4FE4-91D5-2CCFB1F11E65",
       "SupportedSeries": ["Generic Switches"],
-      "SupportedModels": ["Generic Audio Switch"]
+      "SupportedModels": ["Generic Audio Switch 8x8"]
     },
     "Api": {
       "Communication": {
