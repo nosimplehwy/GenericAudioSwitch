@@ -187,19 +187,7 @@
     <Compile Include="DriverLog.cs" />
     <Compile Include="GenericAudioSwitch.cs" />
     <Compile Include="GenericAudioSwitchProtocol.cs" />
-    <Compile Include="MathFunctions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Scaling\IntegerLevel.cs" />
-    <Compile Include="Scaling\LevelRamper.cs" />
-    <Compile Include="Scaling\PercentUshortLevelTranslator.cs" />
-    <Compile Include="Scaling\Scale.cs" />
-    <Compile Include="Scaling\ScalingInterfaces.cs" />
-    <Compile Include="Scaling\ScalingLevelTranslator.cs" />
-    <Compile Include="ScheduledEventTimer.cs" />
-    <Compile Include="SoundUnitedCommandQueueingOverrides.cs" />
-    <Compile Include="SoundUnitedMuteVolController.cs" />
-    <Compile Include="SoundUnitedVolumeController.cs" />
-    <Compile Include="Timers\ITimedEvent.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="GenericAudioSwitch.json" />
