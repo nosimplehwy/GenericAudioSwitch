@@ -2,7 +2,7 @@
 using Crestron.RAD.Common.Logging;
 using Crestron.SimplSharp;
 
-namespace AudioSwitchZektorProAudio
+namespace GenericAudioSwitch
 {
     public class DriverLog
     {
