@@ -88,7 +88,7 @@
         "SupportsAudioBreakaway": false,
         "NullInputIdentifier": "0",
         "VolumeScalingInfo": {
-          "MaximumDeviceLevel": 65535,
+          "MaximumDeviceLevel": 100,
           "MinimumDeviceLevel": 0,
           "DeviceStepSize": 1
         },
