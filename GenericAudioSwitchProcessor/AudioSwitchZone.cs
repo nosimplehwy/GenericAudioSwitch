@@ -11,10 +11,6 @@ namespace AudioSwitchProcessor
         private ushort _route;
         private ushort _mute;
         private ushort _vol;
-        private const ushort _startup = 32769;
-        CTimer Timer;
-        private const uint _repeatDelay = 25;
-        private const uint _repeatTime = 25;
 
         public void Initialize(ushort zoneNum)
         {
@@ -40,12 +36,6 @@ namespace AudioSwitchProcessor
                         {
                             var route = int.Parse(value);
                             Route.Invoke((ushort)route);
-                            if (_route == 0 & route > 0)
-                            {
-                                UpdateVolume(_startup);
-                            }
-                            else if(route == 0)
-                                UpdateVolume(0);
                             _route = (ushort)route;
                             Logger.Log(LogMethod.Console, "ProcessCommand", " OUTPUT input=" + route);
                         }
@@ -93,22 +83,12 @@ namespace AudioSwitchProcessor
                                     SendVolume(_vol);
                                     break;
                                 }
-                            case "+":
-                                {
-                                    VolumeUp();
-                                    break;
-                                }
-                            case "-":
-                                {
-                                    VolumeDown();
-                                    break;
-                                }
                             default:
                                 {
                                     try
                                     {
                                         var vol = int.Parse(value);
-                                        if (vol >= 0 & vol <= 65535)
+                                        if (vol >= 0 & vol <= 100)
                                         {
                                                 UpdateVolume((ushort)vol);
 
@@ -139,63 +119,14 @@ namespace AudioSwitchProcessor
         private void UpdateVolume(ushort level)
         {
             Logger.Log(LogMethod.ConsoleAndError, "UpdateVolume - Level", level.ToString());
-            //var change = 0;
-
-            //if (level > _vol)
-            //    change = 655;
-            //else if (level < _vol)
-            //    change = -655;
-            //else
-            //{
-            //    Stop();
-            //    return;
-            //}
-
-            //int newLevel = _vol + change;
-
-            //var atLimit = false;
-            //if (newLevel > 65535)
-            //{
-            //    newLevel = 65535;
-            //    atLimit = true;
-            //}
-            //else if (newLevel < 0)
-            //{
-            //    newLevel = 0;
-            //    atLimit = true;
-            //}
-
-           // _vol = (ushort)newLevel;
-           _vol = level;
+           
+                _vol = level;
                 Vol.Invoke(_vol);
                 SendVolume(_vol);
                 Logger.Log(LogMethod.ConsoleAndError, "UpdateVolume - New Level", level.ToString());
 
-           // if (atLimit) // Don't go past end
-            //   Stop();
-           // else if (Timer == null)
-             //   Timer = new CTimer(o => { UpdateVolume(level); }, null, _repeatDelay,_repeatTime);
         }
 
-        private void VolumeUp()
-        {
-            if (Timer != null) return;
-             UpdateVolume(_vol++);
-        }
-
-        private void VolumeDown()
-        {
-            if (Timer != null) return;
-                UpdateVolume(_vol--);
-        }
-
-        public void Stop()
-        {
-            Logger.Log(LogMethod.ConsoleAndError, "Stop", "Timer");
-            if (Timer != null)
-                Timer.Stop();
-            Timer = null;
-        }
 
         private void SendVolume(int level)
         {
@@ -210,8 +141,9 @@ namespace AudioSwitchProcessor
             {
                 _mute = state;
                 Mute.Invoke(state);
-                SendMute();
             }
+            SendMute();
+
         }
 
         private void SendMute()
