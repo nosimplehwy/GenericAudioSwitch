@@ -97,6 +97,8 @@ namespace GenericAudioSwitchProcessor
                     AudioSwitchZone zone;
                     if (!zones.TryGetValue(zoneNum, out zone)) { throw new ArgumentException("ProcessMessage", "Could not find zone in dictionary."); };
                     zone.ProcessCommand(match.Groups[2].Value, match.Groups[3].Value);
+                    Logger.Log(LogMethod.Console, "ProcessMessage to ProcessCommand", " OUTPUT zone=" + zoneNum);
+
                 }
                 finally
                 {
