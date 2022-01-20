@@ -5,10 +5,18 @@
 #ENABLE_STACK_CHECKING
   
 #USER_SIMPLSHARP_LIBRARY "GenericAudioSwitchProcessor"
+DIGITAL_INPUT
+_skip_,
+MuteFb;
+
+ANALOG_INPUT
+SourceFb,
+VolumeFb;
 
 DIGITAL_OUTPUT
 _skip_,
-MuteFb;
+MuteOn,
+MuteOff;
 
 ANALOG_OUTPUT
 Source,
@@ -26,6 +34,7 @@ INTEGER_PARAMETER ZoneNum;
     propShortDescription= "Value of switcher output.";
 #END_PARAMETER_PROPERTIES
 
+
 Callback Function UpdateRoute(Integer route)
 {
 	Trace("Zone %d UpdateSource : %d",ZoneNum, route);
@@ -42,7 +51,16 @@ Callback Function UpdateVol(Integer vol)
 Callback Function UpdateMute(Integer mute)
 {
 	Trace("Zone %d UpdateMute : %d",ZoneNum, mute);
-	MuteFb = mute;
+	if(mute = 0)
+	{
+		MuteOn = 0;
+		MuteOff = 1;
+	}
+	else if(mute = 1)
+	{
+		MuteOff = 0;
+		MuteOn = 1;
+	}
 }
 
 Function Main()
