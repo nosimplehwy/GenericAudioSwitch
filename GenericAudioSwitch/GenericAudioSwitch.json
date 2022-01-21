@@ -710,6 +710,134 @@
                 "friendlyName": "Input 8"
               }
             ]
+          },
+          {
+            "ApiIdentifier": "9",
+            "Id": "input9",
+            "Name": "Input 9",
+            "Manufacturer": "ATI",
+            "Model": null,
+            "Type": "DirectInput",
+            "AudioInputDetails": [
+              {
+                "type": "AnalogAudio9",
+                "description": "Input 9 Audio Input",
+                "connector": "Analog",
+                "friendlyName": "Input 9"
+              }
+            ]
+          },
+          {
+            "ApiIdentifier": "10",
+            "Id": "input10",
+            "Name": "Input 10",
+            "Manufacturer": "ATI",
+            "Model": null,
+            "Type": "DirectInput",
+            "AudioInputDetails": [
+              {
+                "type": "AnalogAudio10",
+                "description": "Input 10 Audio Input",
+                "connector": "Analog",
+                "friendlyName": "Input 10"
+              }
+            ]
+          },
+          {
+            "ApiIdentifier": "11",
+            "Id": "input11",
+            "Name": "Input 11",
+            "Manufacturer": "ATI",
+            "Model": null,
+            "Type": "DirectInput",
+            "AudioInputDetails": [
+              {
+                "type": "AnalogAudio11",
+                "description": "Input 11 Audio Input",
+                "connector": "Analog",
+                "friendlyName": "Input 11"
+              }
+            ]
+          },
+          {
+            "ApiIdentifier": "12",
+            "Id": "input12",
+            "Name": "Input 12",
+            "Manufacturer": "ATI",
+            "Model": null,
+            "Type": "DirectInput",
+            "AudioInputDetails": [
+              {
+                "type": "AnalogAudio12",
+                "description": "Input 12 Audio Input",
+                "connector": "Analog",
+                "friendlyName": "Input 12"
+              }
+            ]
+          },
+          {
+            "ApiIdentifier": "13",
+            "Id": "input13",
+            "Name": "Input 13",
+            "Manufacturer": "ATI",
+            "Model": null,
+            "Type": "DirectInput",
+            "AudioInputDetails": [
+              {
+                "type": "AnalogAudio13",
+                "description": "Input 13 Audio Input",
+                "connector": "Analog",
+                "friendlyName": "Input 13"
+              }
+            ]
+          },
+          {
+            "ApiIdentifier": "14",
+            "Id": "input14",
+            "Name": "Input 14",
+            "Manufacturer": "ATI",
+            "Model": null,
+            "Type": "DirectInput",
+            "AudioInputDetails": [
+              {
+                "type": "AnalogAudio14",
+                "description": "Input 14 Audio Input",
+                "connector": "Analog",
+                "friendlyName": "Input 14"
+              }
+            ]
+          },
+          {
+            "ApiIdentifier": "15",
+            "Id": "input15",
+            "Name": "Input 15",
+            "Manufacturer": "ATI",
+            "Model": null,
+            "Type": "DirectInput",
+            "AudioInputDetails": [
+              {
+                "type": "AnalogAudio15",
+                "description": "Input 15 Audio Input",
+                "connector": "Analog",
+                "friendlyName": "Input 15"
+              }
+            ]
+          },
+          {
+            "ApiIdentifier": "16",
+            "Id": "input16",
+            "Name": "Input 16",
+            "Manufacturer": "ATI",
+            "Model": null,
+            "Type": "DirectInput",
+            "AudioInputDetails": [
+              {
+                "type": "AnalogAudio16",
+                "description": "Input 16 Audio Input",
+                "connector": "Analog",
+                "friendlyName": "Input 16"
+              }
+            ]
           }
         ]
       }
