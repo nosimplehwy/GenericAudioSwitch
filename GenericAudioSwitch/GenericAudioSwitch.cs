@@ -20,7 +20,7 @@ namespace GenericAudioSwitch
     {
         public GenericAudioSwitch()
         {
-            
+            EnableLogging = true;
         }
 
         #region ITcp Members
@@ -52,7 +52,6 @@ namespace GenericAudioSwitch
        }
         
         #endregion
-
     }
 
 }

@@ -32,10 +32,8 @@
   OutputSigType2=Digital
   OutputCue3=MuteOff
   OutputSigType3=Digital
-  InputList2Cue1=SourceFb
+  InputList2Cue1=VolumeFb
   InputList2SigType1=Analog
-  InputList2Cue2=VolumeFb
-  InputList2SigType2=Analog
   OutputList2Cue1=Source
   OutputList2SigType1=Analog
   OutputList2Cue2=Volume
@@ -45,8 +43,8 @@
   ParamSigType2=Constant
   MinVariableInputs=2
   MaxVariableInputs=2
-  MinVariableInputsList2=2
-  MaxVariableInputsList2=2
+  MinVariableInputsList2=1
+  MaxVariableInputsList2=1
   MinVariableOutputs=3
   MaxVariableOutputs=3
   MinVariableOutputsList2=2

@@ -10,7 +10,6 @@ _skip_,
 MuteFb;
 
 ANALOG_INPUT
-SourceFb,
 VolumeFb;
 
 DIGITAL_OUTPUT
@@ -34,6 +33,17 @@ INTEGER_PARAMETER ZoneNum;
     propShortDescription= "Value of switcher output.";
 #END_PARAMETER_PROPERTIES
 
+Change VolumeFb
+{
+	Trace("VolumeFb Change: Zone %d UpdateVol", ZoneNum);
+ 	zone.SendVolume();
+}
+
+Change MuteFb
+{
+	Trace("MuteFb Change: Zone %d UpdateMute",ZoneNum);
+ 	zone.SendMute();
+}
 
 Callback Function UpdateRoute(Integer route)
 {
@@ -51,17 +61,27 @@ Callback Function UpdateVol(Integer vol)
 Callback Function UpdateMute(Integer mute)
 {
 	Trace("Zone %d UpdateMute : %d",ZoneNum, mute);
-	if(mute = 0)
+	if(mute = 0 && MuteFb = 1)
 	{
-		MuteOn = 0;
-		MuteOff = 1;
+		pulse(50, MuteOff);
 	}
-	else if(mute = 1)
+	else if(mute = 1 && MuteFb = 0)
 	{
-		MuteOff = 0;
-		MuteOn = 1;
+		pulse(50, MuteOn);
 	}
+	
 }
+
+Callback Integer_Function UpdateVolFb()
+{
+	return (VolumeFb);
+}
+
+Callback Integer_Function UpdateMuteFb()
+{
+	return (MuteFb);
+}
+
 
 Function Main()
 {
@@ -72,6 +92,9 @@ Function Main()
 	registerdelegate(zone, Route, UpdateRoute);
 	registerdelegate(zone, Vol, UpdateVol);
 	registerdelegate(zone, Mute, UpdateMute);
+	registerdelegate(zone, VolFeedback, UpdateVolFb);
+	registerdelegate(zone, MuteFeedback, UpdateMuteFb);
+
 }
 
    

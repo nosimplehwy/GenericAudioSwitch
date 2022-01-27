@@ -80,7 +80,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AudioSwitch.cs" />
-    <Compile Include="AudioSwitchServer.cs" />
     <Compile Include="AudioSwitchZone.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using Crestron.SimplSharp;
-using GenericAudioSwitchProcessor;
+using System.Text.RegularExpressions;
+using AudioSwitchProcessor;
 
-namespace AudioSwitchProcessor
+namespace GenericAudioSwitchProcessor
 {
     public class AudioSwitchZone
     {
@@ -12,22 +11,61 @@ namespace AudioSwitchProcessor
         private ushort _mute;
         private ushort _vol;
 
+        private string _regex = @"OUTPUT(\d+):([A-Z]+)(\d+|\?|\+|\-)";
+
+
+        public delegate void RouteDelegate(ushort value);
+        public delegate void VolDelegate(ushort value);
+        public delegate void MuteDelegate(ushort value);
+
+        public delegate ushort RouteFeedbackDelegate();
+
+        public delegate ushort VolFeedbackDelegate();
+
+        public delegate ushort MuteFeedbackDelegate();
+
+        public RouteDelegate Route { get; set; }
+        public VolDelegate Vol { get; set; }
+        public MuteDelegate Mute { get; set; }
+        public RouteFeedbackDelegate RouteFeedback { get; set; }
+        public VolFeedbackDelegate VolFeedback { get; set; }
+        public MuteFeedbackDelegate MuteFeedback { get; set; }
+
         public void Initialize(ushort zoneNum)
         {
             _zone = Convert.ToString(zoneNum);
             _route = 0;
             _mute = 0;
             _vol = 0;
-            AudioSwitch.RegisterZone(_zone, this);
+            //AudioSwitch.RegisterZone(_zone, this);
+            AudioSwitch.MessageReceived += AudioSwitch_MessageReceived;
         }
 
-        public RouteDelegate Route { get; set; }
-        public VolDelegate Vol { get; set; }
-        public MuteDelegate Mute { get; set; }
-
-
-        internal void ProcessCommand(string cmd, string value)
+        private void AudioSwitch_MessageReceived(object sender, string message)
         {
+            Logger.Log(LogMethod.Console, "ProcessMessage", $"Zone {_zone}: {message}");
+
+            var match = Regex.Match(message, _regex);
+            if (!match.Success)
+            {
+                Logger.Log(LogMethod.Console, "ProcessMessage", $"Zone {_zone}: OUTPUT could not be parsed.");
+                return;
+            }
+            while (match.Success)
+            {
+
+                if(_zone == match.Groups[1].Value) 
+                    ProcessCommand(match.Groups[2].Value, match.Groups[3].Value);
+                
+                match = match.NextMatch();
+            }
+        }
+
+
+       private void ProcessCommand(string cmd, string value)
+        {
+
+
             switch (cmd)
             {
                 case "ROUTE":
@@ -80,7 +118,7 @@ namespace AudioSwitchProcessor
                         {
                             case "?":
                                 {
-                                    SendVolume(_vol);
+                                    SendVolume();
                                     break;
                                 }
                             default:
@@ -122,14 +160,14 @@ namespace AudioSwitchProcessor
            
                 _vol = level;
                 Vol.Invoke(_vol);
-                SendVolume(_vol);
                 Logger.Log(LogMethod.ConsoleAndError, "UpdateVolume - New Level", level.ToString());
 
         }
 
 
-        private void SendVolume(int level)
+        public void SendVolume()
         {
+            var level = VolFeedback.Invoke();
             Logger.Log(LogMethod.ConsoleAndError, "SendVolume", level.ToString());
             AudioSwitch.SendData("^OUTPUT" + _zone + ":VOL" + level + "\r");
         }
@@ -137,24 +175,27 @@ namespace AudioSwitchProcessor
 
         private void UpdateMute(ushort state)
         {
+            Logger.Log(LogMethod.ConsoleAndError, "UpdateMute", state.ToString());
             if (_mute != state)
             {
                 _mute = state;
                 Mute.Invoke(state);
             }
-            SendMute();
-
+            else
+            {
+                //respond with feedback anyway
+                SendMute();
+            }
+            
         }
 
-        private void SendMute()
+        public void SendMute()
         {
-            Logger.Log(LogMethod.ConsoleAndError, "SendMute", _mute.ToString());
-            AudioSwitch.SendData("^OUTPUT" + _zone + ":MUTE" + _mute + "\r");
+            var mute = MuteFeedback.Invoke();
+            Logger.Log(LogMethod.ConsoleAndError, "SendMute", mute.ToString());
+            AudioSwitch.SendData("^OUTPUT" + _zone + ":MUTE" + mute + "\r");
         }
 
-        public delegate void RouteDelegate(ushort value);
-        public delegate void VolDelegate(ushort value);
-        public delegate void MuteDelegate(ushort value);
     }
 
 }
